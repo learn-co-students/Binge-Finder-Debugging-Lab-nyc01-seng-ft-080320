@@ -13,40 +13,49 @@ class App extends Component {
     searchTerm: "",
     selectedShow: "",
     episodes: [],
-    filterByRating: "",
+    filterRating: "",
   }
 
   componentDidMount = () => {
-    Adapter.getShows().then(shows => this.setState({shows}))
+    Adapter.getShows().then(shows => {
+      return this.setState({shows})
+    })
   }
 
   componentDidUpdate = () => {
     window.scrollTo(0, 0)
   }
 
-  handleSearch (e){
+  handleSearch =(e)=> {
     this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
 
   handleFilter = (e) => {
-    e.target.value === "No Filter" ? this.setState({ filterRating:"" }) : this.setState({ filterRating: e.target.value})
+    return e.target.value === "No Filter" ? this.setState({ filterRating:"" }) : this.setState({ filterRating: e.target.value})
   }
 
   selectShow = (show) => {
+    
     Adapter.getShowEpisodes(show.id)
-    .then((episodes) => this.setState({
+    .then((episodes) => {
+      
+      return this.setState({
       selectedShow: show,
       episodes
-    }))
+    })})
   }
 
   displayShows = () => {
-    if (this.state.filterByRating){
-      return this.state.shows.filter((s)=> {
-        return s.rating.average >= this.state.filterByRating
+    let shows = this.state.shows.filter(show => {
+      return show.name.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase())
+    })
+    if (this.state.filterRating){
+      return shows.filter((s)=> {
+        
+        return s.rating.average >= this.state.filterRating
       })
     } else {
-      return this.state.shows
+      return shows
     }
   }
 
