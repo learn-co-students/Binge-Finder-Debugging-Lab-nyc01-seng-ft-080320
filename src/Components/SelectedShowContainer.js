@@ -18,7 +18,7 @@ class SelectedShowContainer extends Component {
   }
 filteredEpisodes = () => {
     return this.props.allEpisodes.filter(episode => {
-        return episode.season === this.state.selectedSeason
+        return episode.season === parseInt(this.state.selectedSeason, 10)
     })
 }
   mapEpisodes = () => {
@@ -30,11 +30,13 @@ filteredEpisodes = () => {
   }
 
   handleSelectionChange = (e) => {
+      console.log(e.target.value)
     this.setState({ selectedSeason: e.target.value })
   }
 
 
   render() {
+      console.log(this.filteredEpisodes())
     const { selectedShow } = this.props
     return (
       <div style={{position: "static"}}>
