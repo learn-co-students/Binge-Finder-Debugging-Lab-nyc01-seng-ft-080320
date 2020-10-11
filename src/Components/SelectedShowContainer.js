@@ -30,13 +30,11 @@ filteredEpisodes = () => {
   }
 
   handleSelectionChange = (e) => {
-      console.log(e.target.value)
     this.setState({ selectedSeason: e.target.value })
   }
 
 
   render() {
-      console.log(this.filteredEpisodes())
     const { selectedShow } = this.props
     return (
       <div style={{position: "static"}}>
