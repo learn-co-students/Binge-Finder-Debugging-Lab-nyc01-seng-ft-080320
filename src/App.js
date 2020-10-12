@@ -23,10 +23,6 @@ class App extends Component {
     })
   }
 
-  componentDidUpdate() {
-    window.scrollTo(0, 0)
-  }
-
   handleSearch = (e) => {
     this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
@@ -57,7 +53,7 @@ class App extends Component {
 
   renderNextPage = () => {
     Adapter.getShows(this.state.page).then(shows => {
-      this.setState({shows})
+      this.setState(prev => ({shows: prev.shows.concat(shows)}))
     })
   }
 

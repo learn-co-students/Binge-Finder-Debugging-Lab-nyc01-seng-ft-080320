@@ -35,6 +35,7 @@ class SelectedShowContainer extends Component {
 
     return (
       <div style={{ position: "static" }}>
+        
         <h2>{selectedShow.name}</h2>
         <img src={selectedShow.image.medium} alt="" />
         <p dangerouslySetInnerHTML={{ __html: selectedShow.summary }}></p>
