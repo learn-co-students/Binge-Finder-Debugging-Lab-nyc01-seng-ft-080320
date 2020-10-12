@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Episode from './Components/Episode';
+import Episode from './Episode';
 
 class SelectedShowContainer extends Component {
 
@@ -20,7 +20,7 @@ class SelectedShowContainer extends Component {
   mapEpisodes = () => {
     return this.props.episodes.map((e)=>{
       if (e.season == this.state.selectedSeason){
-        return (<Episode eachEpisode={e} key={e.id}/>)
+        return (<Episode episode={e} key={e.id}/>)
       }
     })
   }
@@ -29,18 +29,18 @@ class SelectedShowContainer extends Component {
     this.setState({ selectedSeason: e.target.value })
   }
 
-
   render() {
     const { selectedShow } = this.props
-
+    // DO NOT USE dangerouslySetInnerHTML in your own personal projects
+    // as this can expose you, this app is 1 exception where we can use this method
     return (
       <div style={{position: "static"}}>
         <h2>{selectedShow.name}</h2>
-        <img src={selectedShow.image.medium} alt=""/>
+        <img src={selectedShow.image} alt=""/>
         <p dangerouslySetInnerHTML={{__html: selectedShow.summary}}></p>
         <p>Premiered: {selectedShow.premiered}</p>
         <p>Status: {selectedShow.status}</p>
-        <p>Average Rating: {selectedShow.rating.average}</p>
+        <p>Average Rating: {selectedShow.rating}</p>
         <select style={{display: 'block'}} onChange={this.handleSelectionChange}>
           {this.mapSeasons()}
         </select>
@@ -51,12 +51,12 @@ class SelectedShowContainer extends Component {
 
 }
 
-export SelectedShowContainer;
+export default SelectedShowContainer;
 
 
 Array.prototype.unique = function() {
-  var arr = [];
-  for(var i = 0; i < this.length; i++) {
+  let arr = [];
+  for(let i = 0; i < this.length; i++) {
     if(!arr.includes(this[i])) {
         arr.push(this[i]);
     }
