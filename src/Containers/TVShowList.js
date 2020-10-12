@@ -12,9 +12,28 @@ class TVShowList extends Component {
         }
       })
     } else {
-      return this.props.shows.map( (s)=> <TVShow show={s} key={s.id} selectShow={this.props.selectShow}/>)
+    return this.props.shows.map( (s)=> {return <TVShow show={s} key={s.id} selectShow={this.props.selectShow}/>})
     }
   }
+
+  componentDidMount() {
+    document.addEventListener('scroll', this.trackScrolling);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.trackScrolling);
+  }
+
+  isBottom = (el) => {
+    return el.getBoundingClientRect().bottom <= window.innerHeight;
+  }
+
+  trackScrolling = () => {
+    const wrappedElement = document.getElementById('root');
+    if (this.isBottom(wrappedElement)) {
+      this.props.nextPage();
+    }
+  };
 
   render() {
     return (

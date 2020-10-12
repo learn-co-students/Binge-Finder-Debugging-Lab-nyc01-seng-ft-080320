@@ -14,15 +14,16 @@ class App extends Component {
     selectedShow: "",
     episodes: [],
     filterByRating: "",
+    page: 0
   }
 
-  componentDidMount = () => {
-    Adapter.getShows().then(shows => {
+  componentDidMount() {
+    Adapter.getShows(this.state.page).then(shows => {
       this.setState({shows})
     })
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
     window.scrollTo(0, 0)
   }
 
@@ -54,6 +55,16 @@ class App extends Component {
     }
   }
 
+  renderNextPage = () => {
+    Adapter.getShows(this.state.page).then(shows => {
+      this.setState({shows})
+    })
+  }
+
+  nextPage = () => {
+    this.setState(prev => ({page: prev.page + 1}), this.renderNextPage)
+  }
+
   render (){
     return (
       <div>
@@ -63,7 +74,7 @@ class App extends Component {
             {!!this.state.selectedShow ? <SelectedShowContainer selectedShow={this.state.selectedShow} episodes={this.state.episodes}/> : <div/>}
           </Grid.Column>
           <Grid.Column width={11}>
-            <TVShowList shows={this.displayShows()} selectShow={this.selectShow} searchTerm={this.state.searchTerm}/>
+            <TVShowList nextPage={this.nextPage} shows={this.displayShows()} selectShow={this.selectShow} searchTerm={this.state.searchTerm}/>
           </Grid.Column>
         </Grid>
       </div>

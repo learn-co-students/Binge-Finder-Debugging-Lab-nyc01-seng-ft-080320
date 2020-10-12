@@ -1,6 +1,6 @@
 class Adapter {
-  static getShows (){
-    return fetch("http://api.tvmaze.com/shows")
+  static getShows (page){
+    return fetch(`http://api.tvmaze.com/shows?page=${page}`)
     .then(res => res.json())
   }
 
