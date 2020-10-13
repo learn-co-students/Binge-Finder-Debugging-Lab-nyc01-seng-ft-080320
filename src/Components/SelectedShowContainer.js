@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Episode from './Components/Episode';
+import Episode from './Episode';
 
 class SelectedShowContainer extends Component {
 
@@ -19,9 +19,10 @@ class SelectedShowContainer extends Component {
 
   mapEpisodes = () => {
     return this.props.episodes.map((e)=>{
-      if (e.season == this.state.selectedSeason){
+      if (e.season === this.state.selectedSeason){
         return (<Episode eachEpisode={e} key={e.id}/>)
       }
+      return null
     })
   }
 
@@ -51,7 +52,7 @@ class SelectedShowContainer extends Component {
 
 }
 
-export SelectedShowContainer;
+export { SelectedShowContainer };
 
 
 Array.prototype.unique = function() {

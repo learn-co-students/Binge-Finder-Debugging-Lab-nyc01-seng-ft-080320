@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Adapter from '../Adapter';
 import TVShowList from './TVShowList';
 import Nav from './Nav';
-import SelectedShowContainer from './SelectedShowContainer';
+import { SelectedShowContainer } from './SelectedShowContainer';
 import { Grid } from 'semantic-ui-react';
 
 
@@ -56,7 +56,7 @@ class App extends Component {
         <Nav handleFilter={this.handleFilter} handleSearch={this.handleSearch} searchTerm={this.state.searchTerm}/>
         <Grid celled>
           <Grid.Column width={5}>
-            {!!this.state.selectedShow ? <SelectedShowContainer selectedShow={this.state.selectedShow} allEpisodes={this.state.episodes}/> : <div/>}
+            {/* {!!this.state.selectedShow ? <SelectedShowContainer selectedShow={this.state.selectedShow} allEpisodes={this.state.episodes}/> : <div/>} */}
           </Grid.Column>
           <Grid.Column width={11}>
             <TVShowList shows={this.displayShows()} selectShow={this.selectShow} searchTerm={this.state.searchTerm}/>
