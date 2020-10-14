@@ -24,7 +24,7 @@ class App extends Component {
     window.scrollTo(0, 0)
   }
 
-  handleSearch (e){
+  handleSearch = (e) => {
     this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
 
